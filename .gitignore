@@ -1,0 +1,15 @@
+# Ignorar entorno virtual
+venv/
+*.pyc
+__pycache__/
+
+# Ignorar archivos de configuración de IDEs
+.idea/
+.vscode/
+
+# Ignorar archivos de configuración de sistemas operativos
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de caché de pip
+pip-wheel-metadata/
