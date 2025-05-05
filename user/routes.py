@@ -18,13 +18,18 @@ def signout():
 def show_register_form():
     return render_template('register.html')
 
+
 @app.route('/user/login', methods=['POST'])
 def login():
+    
     email = request.form['email']
     password = request.form['password']
 
+
     # Buscar el usuario en la base de datos
     user = db.users.find_one({"email": email})
+
+    print(user)
 
     if user and pbkdf2_sha256.verify(password, user['password']):
         return User().start_session(user)

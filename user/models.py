@@ -6,10 +6,13 @@ import uuid
 class User:
     def start_session(self, user):
         # Eliminar la contraseña antes de guardarla en la sesión
+        
+        print("Entro")
+        
         del user['password']
         session['logged_in'] = True
         session['user'] = user
-        return redirect(url_for('dashboard'))  # Redirige al dashboard después de iniciar sesión
+        return redirect(url_for('perfil'))  # Redirige al dashboard después de iniciar sesión
     
     def signup(self):
         # Imprimir los datos del formulario para depuración

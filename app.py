@@ -29,9 +29,18 @@ def home():
 def register():
     return render_template('register.html')
 
+
 @app.route('/perfil/')
 @login_required
 def perfil():
     return render_template('perfil.html')
 
+@app.route('/dashboard/')
+@login_required
+def dashboard():
+    return render_template('dashboard.html')
+
 from user import routes
+
+
+# COPY
