@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/dashboard">Gestor de Tareas</a>
+        <a class="navbar-brand" href="/dashboard">Grades</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,6 +19,9 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="/perfil">Mi Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/create_course">Crear curso</a>
                 </li>
             </ul>
 
@@ -39,6 +42,9 @@
         <p>
             <strong>ID: </strong> {{session['user']['_id'] }} <br>
             <strong>Nombre: </strong> {{session['user']['name'] }} <br>
+            <strong>Apellido: </strong> {{session['user']['last_name'] }} <br>
+            <strong>Codigo: </strong> {{session['user']['code'] }} <br>
+            <strong>Telefono: </strong> {{session['user']['phone_number'] }} <br>
             <strong>Email: </strong> {{session['user']['email'] }} <br>
 
         </p>

@@ -2,7 +2,7 @@ from bson import ObjectId
 from flask import render_template, redirect, url_for, request, jsonify, Flask, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
-from user.models import User
+from user.models import User, Course
 from app import login_required
 from passlib.hash import pbkdf2_sha256
 
@@ -22,12 +22,12 @@ def show_register_form():
 @app.route('/user/login', methods=['POST'])
 def login():
     
-    email = request.form['email']
+    code = request.form['code']
     password = request.form['password']
 
 
     # Buscar el usuario en la base de datos
-    user = db.users.find_one({"email": email})
+    user = db.users.find_one({"code": code})
 
     print(user)
 
@@ -36,3 +36,19 @@ def login():
 
     # Si las credenciales son incorrectas, mostrar mensaje de error
     return render_template("login.html", error="Credenciales incorrectas"), 401
+
+@app.route('/create_course', methods=['GET','POST'])
+@login_required
+def create_course():
+    title = request.form.get('title')
+    description = request.form.get('description')
+    user_id = session['user']['_id']
+
+    if not title or not description:
+        return render_template('create_course.html', error="Todos los campos son obligatorios")
+
+    course = Course(title, description, user_id)
+    if course.save():
+        return redirect(url_for('dashboard'))
+    else:
+        return render_template('create_course.html', error="Error al crear el curso")

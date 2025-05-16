@@ -17,7 +17,7 @@
             </li>
         </ul>
             <form class="d-flex">
-                <a class="btn btn-secondary my-2 my-sm-0" style="margin: 1em;" href="/register">Register</a>
+                <a class="btn btn-secondary my-2 my-sm-0" style="margin: 1em;" href="/register">Registro</a>
             
             </form>
             <form class="d-flex">
@@ -33,13 +33,22 @@
         <h1 class="center">Registrarse</h1>
         <form name="signup_form" method="POST" action="/user/signup">
 
-            <p><strong>Name</strong></p>
+            <p><strong>Nombre</strong></p>
             <input type="text" name="name" class="field" required>
+            
+            <p><strong>Apellido</strong></p>
+            <input type="last_name" name="last_name" class="field" required>
 
-        <p><strong>Email</strong></p>
+            <p><strong>Código</strong></p>
+            <input type="code" name="code" class="field" required>
+            
+            <p><strong>Telefono</strong></p>
+            <input type="phone_number" name="phone_number" class="field" required>
+
+            <p><strong>Email</strong></p>
             <input type="email" name="email" class="field" required>
 
-            <p><strong>Password</strong></p>
+            <p><strong>Contraseña</strong></p>
             <input type="password" name="password" class="field" required>
             
             <p class="error error--hidden"> No se pudo registrar</p>
