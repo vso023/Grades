@@ -77,18 +77,70 @@ class User:
         return render_template("login.html", error="Credenciales incorrectas"), 401
 
 class Course:
-    def __init__(self, title, description, user_id):
-        self.course = {
-            "_id": uuid.uuid4().hex,
+    @staticmethod
+    def create_course(data, user_id):
+        course_id = uuid.uuid4().hex
+        topic_ids = []
+
+        for topic_data in data['topics']:
+            activity_ids = []
+
+            for activity in topic_data.get('activities', []):
+                activity_id = uuid.uuid4().hex
+                Activity.create_activity_with_id(
+                    activity_id,
+                    activity['title'],
+                    activity['description'],
+                    activity['weight'],
+                    activity['links']
+                )
+                activity_ids.append(activity_id)
+
+            topic_id = uuid.uuid4().hex
+            Topic.create_topic_with_id(
+                topic_id,
+                topic_data['title'],
+                topic_data['description'],
+                activity_ids,
+                topic_data.get('links', [])
+            )
+            topic_ids.append(topic_id)
+
+        course = {
+            "_id": course_id,
+            "title": data['title'],
+            "description": data['description'],
+            "user_id": user_id,
+            "topics": topic_ids  # ← IDs de los temas
+        }
+        db.courses.insert_one(course)
+        return course_id
+
+        
+class Topic:
+    @staticmethod
+    def create_topic_with_id(topic_id, title, description, activity_ids, corte, links=[]):
+        topic = {
+            "_id": topic_id,
             "title": title,
             "description": description,
-            "created_by": user_id
+            "activities": activity_ids,  # IDs de actividades
+            "corte": corte,              # <-- Agregado
+            "links": links
         }
+        db.topics.insert_one(topic)
 
-    def save(self):
-        try:
-            db.courses.insert_one(self.course)
-            return True
-        except Exception as e:
-            print("Error al guardar curso:", e)
-            return False
+
+
+
+class Activity:
+    @staticmethod
+    def create_activity_with_id(activity_id, title, description, weight, links=[]):
+        activity = {
+            "_id": activity_id,
+            "title": title,
+            "description": description,
+            "weight": weight,
+            "links": links
+        }
+        db.activities.insert_one(activity)

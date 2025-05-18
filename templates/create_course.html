@@ -2,23 +2,27 @@
 
 {% block content %}
 <div class="card-wrapper">
-    <div class="card">
-        <h1 class="center">Crear Curso</h1>
+  <div class="card">
+    <h1 class="center">Crear Curso</h1>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+    <form id="courseForm">
+      <p><strong>Nombre del Curso</strong></p>
+      <input type="text" name="title" class="field" required>
 
-        <form method="POST" action="/create_course">
-            <p><strong>Nombre del Curso</strong></p>
-            <input type="text" name="title" class="field" required>
+      <p><strong>Descripción</strong></p>
+      <textarea name="description" class="field" required></textarea>
 
-            <p><strong>Descripción</strong></p>
-            <textarea name="description" class="field" required></textarea>
+      <hr>
 
-            <br>
-            <input type="submit" value="Crear Curso" class="btn">
-        </form>
-    </div>
+      <div id="topicsContainer"></div>
+
+      <button type="button" onclick="addTopic()">+ Agregar Tema</button>
+
+      <br><br>
+      <input type="submit" value="Crear Curso" class="btn">
+    </form>
+  </div>
 </div>
+
+<script src = "static/js/scripts.js"></script>
 {% endblock %}
