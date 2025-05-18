@@ -101,6 +101,7 @@ class Course:
                 topic_id,
                 topic_data['title'],
                 topic_data['description'],
+                topic_data['weight'],  # <-- Agregado
                 activity_ids,
                 topic_data.get('links', [])
             )
@@ -119,11 +120,12 @@ class Course:
         
 class Topic:
     @staticmethod
-    def create_topic_with_id(topic_id, title, description, activity_ids, corte, links=[]):
+    def create_topic_with_id(topic_id, title, description,weight, activity_ids, corte, links=[]):
         topic = {
             "_id": topic_id,
             "title": title,
             "description": description,
+            "weight": weight,  # Peso inicial
             "activities": activity_ids,  # IDs de actividades
             "corte": corte,              # <-- Agregado
             "links": links

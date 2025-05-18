@@ -76,6 +76,7 @@ def create_course():
             topic_id=topic_id,
             title=topic['title'],
             description=topic['description'],
+            weight=topic['weight'],
             activity_ids=activity_ids,
             corte=topic['corte'],           # <-- Aquí lo pasas
             links=topic.get('links', [])

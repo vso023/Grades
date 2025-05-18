@@ -9,6 +9,7 @@ function addTopic() {
       <h3>Tema ${topicId + 1}</h3>
       <input type="text" name="topicTitle" placeholder="Título del tema" class="field" required>
       <textarea name="topicDescription" placeholder="Descripción del tema" class="field" required></textarea>
+      <input type="number" step="0.1" name="topicWeight" placeholder="Peso (%)" class="field" required>
 
       <label><strong>Corte:</strong></label>
       <select name="topicCorte" class="field" required>
@@ -64,6 +65,7 @@ document.getElementById('courseForm').addEventListener('submit', async (e) => {
   topicsDivs.forEach(topicDiv => {
     const topicTitle = topicDiv.querySelector('input[name="topicTitle"]').value;
     const topicDescription = topicDiv.querySelector('textarea[name="topicDescription"]').value;
+    const topicWeight = topicDiv.querySelector('input[name="topicWeight"]').value;
     const topicCorte = parseInt(topicDiv.querySelector('select[name="topicCorte"]').value);
 
     const topicLinks = Array.from(topicDiv.querySelectorAll('.topic-links input[name="link"]')).map(i => i.value);
@@ -88,6 +90,7 @@ document.getElementById('courseForm').addEventListener('submit', async (e) => {
     topics.push({
       title: topicTitle,
       description: topicDescription,
+      weight: topicWeight,
       corte: topicCorte,
       links: topicLinks,
       activities: activities
